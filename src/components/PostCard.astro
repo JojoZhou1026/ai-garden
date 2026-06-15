@@ -1,0 +1,63 @@
+---
+interface Props {
+  url: string;
+  title: string;
+  excerpt?: string;
+  category: string;
+  date: string;
+  emoji?: string;
+  tone?: "violet" | "peach" | "mint" | "sky" | "flame" | "cream";
+}
+
+const {
+  url,
+  title,
+  excerpt,
+  category,
+  date,
+  emoji = "✨",
+  tone = "cream",
+} = Astro.props;
+
+const toneMap: Record<string, string> = {
+  violet: "bg-violet text-cream",
+  peach: "bg-peach-deep text-violet",
+  mint: "bg-mint text-ink",
+  sky: "bg-sky text-ink",
+  flame: "bg-flame text-cream",
+  cream: "bg-cream text-violet",
+};
+
+const categoryToneMap: Record<string, string> = {
+  "玩什么": "bg-flame/15 text-flame",
+  "试试看": "bg-violet/15 text-violet",
+  "值得看": "bg-mint/40 text-violet-deep",
+  "讲点啥": "bg-sky/50 text-violet-deep",
+};
+
+const bgClass = toneMap[tone];
+const catClass = categoryToneMap[category] ?? "bg-cream text-violet";
+---
+
+<a
+  href={url}
+  class={`card-hover group block rounded-3xl p-7 ${bgClass} relative overflow-hidden`}
+>
+  <div class="flex items-center justify-between mb-5">
+    <span class={`text-xs font-medium px-3 py-1 rounded-full ${catClass}`}>
+      {category}
+    </span>
+    <span class="text-2xl group-hover:scale-110 transition-transform duration-300">{emoji}</span>
+  </div>
+  <h3 class={`font-display font-extrabold text-2xl leading-tight mb-3 ${tone === "violet" || tone === "flame" ? "text-cream" : "text-violet"}`}>
+    {title}
+  </h3>
+  {excerpt && (
+    <p class={`text-sm leading-relaxed mb-4 ${tone === "violet" || tone === "flame" ? "text-cream/85" : "text-ink/75"}`}>
+      {excerpt}
+    </p>
+  )}
+  <div class={`text-xs ${tone === "violet" || tone === "flame" ? "text-cream/60" : "text-ink/55"}`}>
+    {date}
+  </div>
+</a>

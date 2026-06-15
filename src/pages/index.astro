@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ShapeBg from "../components/ShapeBg.astro";
+
+const doors = [
+  {
+    url: "/stories",
+    name: "玩什么",
+    subtitle: "真实小故事",
+    emoji: "🌱",
+    bg: "bg-flame",
+    text: "text-cream",
+    knob: "bg-cream",
+    label: "01",
+  },
+  {
+    url: "/recipes",
+    name: "试试看",
+    subtitle: "Prompt 配方",
+    emoji: "🧰",
+    bg: "bg-violet",
+    text: "text-cream",
+    knob: "bg-flame",
+    label: "02",
+  },
+  {
+    url: "/picks",
+    name: "值得看",
+    subtitle: "外部精选",
+    emoji: "✨",
+    bg: "bg-mint",
+    text: "text-violet",
+    knob: "bg-violet",
+    label: "03",
+  },
+  {
+    url: "/basics",
+    name: "讲点啥",
+    subtitle: "概念扫盲",
+    emoji: "📖",
+    bg: "bg-sky",
+    text: "text-violet",
+    knob: "bg-violet",
+    label: "04",
+  },
+];
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="relative">
+    <ShapeBg />
+    <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-20 md:pt-28 md:pb-24">
+      <p class="text-sm font-medium text-flame mb-6 tracking-wide">
+        ✦ 一个慢慢长的小角落
+      </p>
+      <h1 class="font-display font-extrabold text-violet text-[clamp(3rem,9vw,7rem)] leading-[0.95] tracking-tight mb-8">
+        把 AI<br/>
+        <span class="relative inline-block">
+          用起来
+          <svg
+            class="absolute -bottom-3 left-0 w-full"
+            viewBox="0 0 300 20"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M5 15 Q 80 2 150 12 T 295 8"
+              stroke="#FF6B47"
+              stroke-width="5"
+              stroke-linecap="round"
+              fill="none"
+            />
+          </svg>
+        </span>
+        <br/>
+        的小角落。
+      </h1>
+      <p class="max-w-2xl text-lg md:text-xl text-ink/75 leading-relaxed mb-10">
+        这里不是 AI 教学网站，也不是大佬的修炼圣地。
+        我把自己学 AI 路上捡到的 Prompt、用法、小故事和困惑慢慢攒在这儿——
+        来串个门，挑你想看的看，能用上就拿走。
+      </p>
+
+      <div class="flex flex-wrap gap-3">
+        <a href="#rooms" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-violet text-cream font-medium hover:bg-violet-deep transition-colors">
+          推开四扇门看看
+          <span aria-hidden="true">↓</span>
+        </a>
+        <a href="/about" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-violet text-violet font-medium hover:bg-violet hover:text-cream transition-colors">
+          这里是谁建的？
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOORS -->
+  <section id="rooms" class="relative bg-cream py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex items-end justify-between mb-14 flex-wrap gap-4">
+        <div>
+          <p class="text-sm font-medium text-flame mb-3">✦ 四道门</p>
+          <h2 class="font-display font-extrabold text-violet text-4xl md:text-5xl">
+            推一扇<br class="md:hidden"/>进去看看。
+          </h2>
+        </div>
+        <p class="text-ink/70 max-w-md">
+          没有学习路径、没有打卡。<br/>每扇门里都是各自独立的小天地。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-7">
+        {doors.map((d) => (
+          <a href={d.url} class="group block">
+            <div
+              class={`relative aspect-[2/3.2] ${d.bg} ${d.text} rounded-t-[3rem] p-5 flex flex-col items-center overflow-hidden transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-violet/30`}
+              style="box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18), inset 0 -1px 0 0 rgba(0,0,0,0.08);"
+            >
+              {/* room number badge */}
+              <div class="absolute top-4 left-4 text-[10px] font-mono opacity-50 tracking-[0.2em]">
+                NO.{d.label}
+              </div>
+
+              {/* arched transom window */}
+              <svg
+                class="mt-6 w-14 h-10 opacity-45"
+                viewBox="0 0 56 40"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M3 39 V 18 Q 3 3 28 3 Q 53 3 53 18 V 39 Z" />
+                <line x1="19.5" y1="3.5" x2="19.5" y2="39" stroke-width="1" />
+                <line x1="36.5" y1="3.5" x2="36.5" y2="39" stroke-width="1" />
+              </svg>
+
+              {/* center: emoji + name + subtitle */}
+              <div class="flex-1 flex flex-col items-center justify-center text-center px-2">
+                <div class="text-[3.5rem] md:text-[4rem] mb-5 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
+                  {d.emoji}
+                </div>
+                <h3 class={`font-display font-extrabold text-2xl md:text-3xl tracking-tight leading-none ${d.text}`}>
+                  {d.name}
+                </h3>
+                <p class={`text-sm md:text-base mt-2.5 opacity-70 ${d.text}`}>
+                  {d.subtitle}
+                </p>
+              </div>
+
+              {/* knob with shine */}
+              <div class={`absolute right-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full ${d.knob} shadow-md transition-all duration-500 group-hover:scale-125`}>
+                <div class="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-cream/80"></div>
+              </div>
+
+              {/* kick plate */}
+              <div class="absolute left-5 right-5 bottom-5 h-px bg-current opacity-25"></div>
+              <div class="absolute left-7 right-7 bottom-3 h-px bg-current opacity-15"></div>
+            </div>
+            <div class="text-center mt-4 text-xs font-medium text-violet/55 group-hover:text-flame transition-colors duration-300">
+              推门进 →
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT BANNER -->
+  <section class="bg-cream pb-20 md:pb-28">
+    <div class="max-w-6xl mx-auto px-6">
+      <a
+        href="/about"
+        class="card-hover group block rounded-3xl bg-peach-deep p-8 md:p-10 relative overflow-hidden"
+      >
+        <div class="absolute -bottom-12 -right-8 w-56 h-56 rounded-full bg-flame/25 blur-2xl pointer-events-none"></div>
+        <div class="relative flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
+          <div class="text-6xl md:text-7xl transition-transform duration-500 group-hover:rotate-12 origin-bottom-left">
+            👋
+          </div>
+          <div class="flex-1">
+            <p class="text-xs font-medium text-flame mb-2 tracking-widest uppercase">
+              About
+            </p>
+            <h3 class="font-display font-extrabold text-violet text-3xl md:text-4xl mb-2 leading-tight">
+              关于这里
+            </h3>
+            <p class="text-ink/75 max-w-2xl">
+              这个小园地为什么存在、Jojo 是谁、想投个稿/找我聊聊怎么办——都在里面。
+            </p>
+          </div>
+          <div class="text-violet text-2xl group-hover:translate-x-2 transition-transform duration-300 self-end md:self-center">
+            →
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+</BaseLayout>

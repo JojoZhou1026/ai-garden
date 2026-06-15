@@ -1,0 +1,50 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={`${frontmatter.title} · AI 学习小园地`} description={frontmatter.excerpt}>
+  <article class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+    <a href="/" class="inline-block text-sm text-violet hover:text-flame mb-8 transition-colors">
+      ← 回到小园地
+    </a>
+
+    <div class="flex flex-wrap items-center gap-3 mb-6">
+      <span class="text-xs font-medium px-3 py-1 rounded-full bg-violet/10 text-violet">
+        {frontmatter.category}
+      </span>
+      <span class="text-sm text-ink/55">{frontmatter.date}</span>
+      {frontmatter.author && (
+        <span class="text-sm text-ink/55">· {frontmatter.author}</span>
+      )}
+    </div>
+
+    <h1 class="font-display font-extrabold text-violet text-5xl md:text-6xl leading-[0.95] tracking-tight mb-8">
+      <span class="text-4xl md:text-5xl mr-3">{frontmatter.emoji}</span>
+      {frontmatter.title}
+    </h1>
+
+    {frontmatter.excerpt && (
+      <p class="text-xl text-ink/75 leading-relaxed mb-10 border-l-4 border-flame pl-5">
+        {frontmatter.excerpt}
+      </p>
+    )}
+
+    <div class="prose-jojo">
+      <slot />
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-violet/15">
+      <p class="text-sm text-ink/60 mb-4">读完了？</p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/" class="px-5 py-2.5 rounded-full bg-violet text-cream text-sm font-medium hover:bg-flame transition-colors">
+          继续逛
+        </a>
+        <a href="/about#contact" class="px-5 py-2.5 rounded-full border-2 border-violet text-violet text-sm font-medium hover:bg-violet hover:text-cream transition-colors">
+          想和我聊聊
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

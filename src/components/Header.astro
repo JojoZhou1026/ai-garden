@@ -1,0 +1,35 @@
+---
+const nav = [
+  { label: "玩什么", href: "/stories" },
+  { label: "试试看", href: "/recipes" },
+  { label: "值得看", href: "/picks" },
+  { label: "讲点啥", href: "/basics" },
+  { label: "关于这里", href: "/about" },
+];
+---
+
+<header class="sticky top-0 z-50 backdrop-blur-md bg-peach/80 border-b border-violet/10">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <span class="inline-block w-8 h-8 rounded-full bg-violet relative overflow-hidden">
+        <span class="absolute inset-1 rounded-full bg-flame opacity-90 group-hover:rotate-180 transition-transform duration-700"></span>
+      </span>
+      <span class="font-display font-extrabold text-violet text-lg tracking-tight">
+        AI 学习小园地
+      </span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-violet">
+      {nav.map((item) => (
+        <a href={item.href} class="hover:text-flame transition-colors duration-200">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <a
+      href="/about#contact"
+      class="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-violet text-cream text-sm font-medium hover:bg-flame transition-colors duration-200"
+    >
+      投个稿 →
+    </a>
+  </div>
+</header>

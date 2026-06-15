@@ -1,0 +1,81 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+  category: string;
+  emoji: string;
+  title: string;
+  intro: string;
+  accent: string;
+}
+
+const { category, emoji, title, intro, accent } = Astro.props;
+
+const allPosts = await Promise.all(
+  Object.entries(import.meta.glob<any>("../pages/posts/*.md", { eager: true })).map(
+    ([path, mod]: any) => {
+      const slug = path.split("/").pop()!.replace(".md", "");
+      return {
+        url: `/posts/${slug}`,
+        title: mod.frontmatter.title,
+        excerpt: mod.frontmatter.excerpt,
+        category: mod.frontmatter.category,
+        date: mod.frontmatter.date,
+        emoji: mod.frontmatter.emoji,
+      };
+    }
+  )
+);
+
+const posts = allPosts
+  .filter((p) => p.category === category)
+  .sort((a, b) => (a.date < b.date ? 1 : -1));
+
+const tones: Array<"violet" | "peach" | "mint" | "sky" | "flame" | "cream"> = [
+  "cream", "peach", "mint", "sky", "violet", "flame",
+];
+---
+
+<BaseLayout title={`${title} · AI 学习小园地`}>
+  <section class="relative">
+    <div class={`absolute top-0 right-0 w-96 h-96 rounded-full ${accent} blur-3xl pointer-events-none opacity-50`}></div>
+    <div class="relative max-w-5xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16">
+      <a href="/" class="inline-block text-sm text-violet hover:text-flame mb-8 transition-colors">
+        ← 回到小园地
+      </a>
+
+      <p class="text-sm font-medium text-flame mb-4">✦ 房间</p>
+      <h1 class="font-display font-extrabold text-violet text-5xl md:text-7xl leading-[0.95] tracking-tight mb-6">
+        <span class="text-4xl md:text-5xl mr-3">{emoji}</span>
+        {title}
+      </h1>
+      <p class="max-w-2xl text-lg text-ink/75 leading-relaxed">
+        {intro}
+      </p>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 pb-24">
+    {posts.length === 0 ? (
+      <div class="rounded-3xl bg-cream p-12 text-center">
+        <p class="text-violet text-lg mb-2">这个房间还在布置中 ☕</p>
+        <p class="text-ink/60 text-sm">先去逛逛<a href="/" class="fancy-link">其他房间</a>。</p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {posts.map((post, i) => (
+          <PostCard
+            url={post.url}
+            title={post.title}
+            excerpt={post.excerpt}
+            category={post.category}
+            date={post.date}
+            emoji={post.emoji}
+            tone={tones[i % tones.length]}
+          />
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

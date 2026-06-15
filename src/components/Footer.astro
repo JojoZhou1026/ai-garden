@@ -1,0 +1,20 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-violet text-cream mt-20">
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+      <div>
+        <p class="font-display font-extrabold text-2xl mb-2">AI 学习小园地</p>
+        <p class="text-sm text-cream/70 max-w-md">
+          一个由 Jojo 维护的 AI 学习小角落。慢慢长，不卖课，不刷屏。
+        </p>
+      </div>
+      <div class="text-xs text-cream/60 space-y-1">
+        <p>© {year} Jojo · jojomind.com</p>
+        <p>用 Astro 搭，用 Cloudflare 跑。</p>
+      </div>
+    </div>
+  </div>
+</footer>
