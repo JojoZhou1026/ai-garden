@@ -35,16 +35,123 @@ const { frontmatter } = Astro.props;
       <slot />
     </div>
 
-    <div class="mt-16 pt-8 border-t border-violet/15">
-      <p class="text-sm text-ink/60 mb-4">读完了？</p>
-      <div class="flex flex-wrap gap-3">
-        <a href="/" class="px-5 py-2.5 rounded-full bg-violet text-cream text-sm font-medium hover:bg-flame transition-colors">
-          继续逛
-        </a>
-        <a href="/about#contact" class="px-5 py-2.5 rounded-full border-2 border-violet text-violet text-sm font-medium hover:bg-violet hover:text-cream transition-colors">
-          想和我聊聊
-        </a>
+    {/* === 留言区 === */}
+    <section class="mt-20 pt-10 border-t border-violet/15">
+      <div class="rounded-3xl bg-cream p-6 md:p-8">
+        <p class="text-xs font-medium text-flame tracking-widest uppercase mb-3">
+          ✦ 留个言
+        </p>
+        <h3 class="font-display font-extrabold text-violet text-2xl md:text-3xl mb-2">
+          想问点啥？想说点啥？
+        </h3>
+        <p class="text-sm text-ink/65 mb-6">
+          问题、补充、不同意见、夸我或者骂我——都可以。每条 Jojo 都会看到，但回不回看缘分。
+        </p>
+
+        {/*
+          后端：Cloudflare Pages Function（functions/api/submit.ts）+ Resend API。
+          需要在 Cloudflare Pages 项目设置里配 RESEND_API_KEY 和 NOTIFY_EMAIL 两个 env var。
+        */}
+        <form id="comment-form" class="space-y-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="叫你什么？（可以不填）"
+            class="w-full px-4 py-3 rounded-xl bg-peach border border-transparent focus:border-violet focus:outline-none transition-colors text-ink placeholder:text-ink/40"
+            maxlength="100"
+          />
+
+          <textarea
+            name="message"
+            required
+            rows="4"
+            placeholder="说点啥……"
+            class="w-full px-4 py-3 rounded-xl bg-peach border border-transparent focus:border-violet focus:outline-none transition-colors text-ink placeholder:text-ink/40 resize-none"
+            maxlength="5000"
+          ></textarea>
+
+          {/* honeypot：人类看不见，机器人会填 → 我们拒掉 */}
+          <input
+            type="text"
+            name="website"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+            style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;"
+          />
+
+          <input type="hidden" name="post" value={frontmatter.title} />
+
+          <div class="flex items-center justify-between flex-wrap gap-3">
+            <button
+              type="submit"
+              id="comment-submit"
+              class="px-6 py-2.5 rounded-full bg-violet text-cream text-sm font-medium hover:bg-flame transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              发出 →
+            </button>
+            <p class="text-xs text-ink/50">
+              不方便填表？
+              <a href={`mailto:hi@jojomind.com?subject=小园地留言：${frontmatter.title}`} class="text-violet hover:text-flame transition-colors">
+                直接发邮件
+              </a>
+            </p>
+          </div>
+
+          <p id="comment-status" class="text-sm hidden" role="status" aria-live="polite"></p>
+        </form>
+
+        <script is:inline>
+          (function () {
+            const form = document.getElementById("comment-form");
+            const btn = document.getElementById("comment-submit");
+            const status = document.getElementById("comment-status");
+            if (!form || !btn || !status) return;
+
+            form.addEventListener("submit", async (e) => {
+              e.preventDefault();
+              btn.disabled = true;
+              btn.textContent = "发送中……";
+              status.className = "text-sm hidden";
+
+              try {
+                const fd = new FormData(form);
+                const res = await fetch("/api/submit", {
+                  method: "POST",
+                  body: fd,
+                });
+                const data = await res.json().catch(() => ({}));
+
+                if (res.ok && data && data.ok) {
+                  status.textContent = "✅ 收到了！谢谢你写来。";
+                  status.className = "text-sm text-violet font-medium";
+                  form.reset();
+                } else {
+                  const msg = (data && data.error) || "没发出去，可以用上面的邮件链接试试。";
+                  status.textContent = "⚠️ " + msg;
+                  status.className = "text-sm text-flame font-medium";
+                }
+              } catch (err) {
+                status.textContent = "⚠️ 网络出了点问题，可以用上面的邮件链接试试。";
+                status.className = "text-sm text-flame font-medium";
+              } finally {
+                btn.disabled = false;
+                btn.textContent = "发出 →";
+              }
+            });
+          })();
+        </script>
       </div>
+    </section>
+
+    {/* === 底部 CTA === */}
+    <div class="mt-12 pt-6 border-t border-violet/10 flex flex-wrap items-center justify-between gap-3">
+      <a href="/" class="text-sm text-violet hover:text-flame transition-colors">
+        ← 回到小园地
+      </a>
+      <a href="/about" class="text-sm text-violet hover:text-flame transition-colors">
+        关于这里 →
+      </a>
     </div>
   </article>
 </BaseLayout>
