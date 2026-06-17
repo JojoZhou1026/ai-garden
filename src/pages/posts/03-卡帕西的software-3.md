@@ -2,7 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: 卡帕西讲的"Software 3.0"是什么
 date: 2026-06-08
-category: 值得看
+category: 瞧瞧外面
 emoji: ✨
 excerpt: 一句话总结：你每天在 Copilot 框里打的字，本质上是在"编程"。
 ---

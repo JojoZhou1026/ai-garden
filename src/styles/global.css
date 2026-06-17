@@ -122,3 +122,87 @@ a.fancy-link:hover::after {
   color: var(--color-violet-deep);
   font-style: italic;
 }
+
+/* === DOOR === */
+/* Each door pivots open on hover, revealing a glimpse of its world. */
+
+.door-stage {
+  perspective: 1400px;
+  perspective-origin: 60% 50%;
+}
+
+.door-panel {
+  transform-origin: left center;
+  /* default: closed flat, clean silhouette */
+  transform: perspective(1400px) rotateY(0deg);
+  transition: transform 800ms cubic-bezier(0.34, 1.2, 0.64, 1),
+              box-shadow 600ms ease;
+  backface-visibility: hidden;
+  will-change: transform;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 -2px 0 0 rgba(0, 0, 0, 0.10),
+    0 8px 20px -10px rgba(26, 19, 64, 0.25);
+}
+
+.group:hover .door-panel,
+.group:focus-visible .door-panel {
+  transform: perspective(1400px) rotateY(-58deg);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+    inset 0 -2px 0 0 rgba(0, 0, 0, 0.15),
+    18px 12px 40px -8px rgba(26, 19, 64, 0.50);
+}
+
+.door-interior-emoji {
+  transition: transform 700ms cubic-bezier(0.34, 1.2, 0.64, 1),
+              filter 600ms ease;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+  transform: translateY(0) scale(1);
+}
+.group:hover .door-interior-emoji {
+  transform: translateY(-6px) scale(1.08);
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.35));
+}
+
+.door-light-wedge {
+  opacity: 0;
+  transition: opacity 600ms ease;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 245, 220, 0.85) 0%,
+    rgba(255, 245, 220, 0) 80%
+  );
+  clip-path: polygon(0 8%, 100% 22%, 100% 78%, 0 92%);
+  mix-blend-mode: screen;
+}
+.group:hover .door-light-wedge {
+  opacity: 1;
+}
+
+/* tiny atmosphere particles inside each room */
+.door-particle {
+  animation: floatUp 3s ease-in-out infinite;
+}
+.door-particle:nth-child(2) { animation-delay: 0.6s; }
+.door-particle:nth-child(3) { animation-delay: 1.2s; }
+.door-particle:nth-child(4) { animation-delay: 1.8s; }
+.door-particle:nth-child(5) { animation-delay: 2.4s; }
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50%      { transform: translateY(-8px) scale(1.15); opacity: 1; }
+}
+
+.door-knob-ring {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.25),
+    0 2px 6px rgba(26, 19, 64, 0.35);
+  transition: transform 500ms ease, box-shadow 500ms ease;
+}
+.group:hover .door-knob-ring {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.35),
+    0 4px 12px rgba(26, 19, 64, 0.45);
+}

@@ -5,42 +5,54 @@ import ShapeBg from "../components/ShapeBg.astro";
 const doors = [
   {
     url: "/stories",
-    name: "玩什么",
-    subtitle: "真实小故事",
+    name: "看真事儿",
+    subtitle: "别人用 AI 真搞定了什么",
     emoji: "🌱",
-    bg: "bg-flame",
+    doorBg: "bg-flame",
     text: "text-cream",
-    knob: "bg-cream",
+    interiorBg: "bg-gradient-to-b from-mint to-[#8AD5B5]",
+    floorBg: "bg-[#6BC799]",
+    particleBg: "bg-cream",
+    knobBg: "bg-mint",
     label: "01",
   },
   {
     url: "/recipes",
-    name: "试试看",
-    subtitle: "Prompt 配方",
+    name: "抄两招",
+    subtitle: "拿走就能用的 Prompt 和小技巧",
     emoji: "🧰",
-    bg: "bg-violet",
+    doorBg: "bg-violet",
     text: "text-cream",
-    knob: "bg-flame",
+    interiorBg: "bg-gradient-to-b from-flame-soft to-flame",
+    floorBg: "bg-[#D9482E]",
+    particleBg: "bg-cream",
+    knobBg: "bg-flame",
     label: "02",
   },
   {
-    url: "/picks",
-    name: "值得看",
-    subtitle: "外部精选",
-    emoji: "✨",
-    bg: "bg-mint",
+    url: "/basics",
+    name: "扫个盲",
+    subtitle: "一句话讲懂一个概念",
+    emoji: "📖",
+    doorBg: "bg-sky",
     text: "text-violet",
-    knob: "bg-violet",
+    interiorBg: "bg-gradient-to-b from-[#FFD89E] to-flame-soft",
+    floorBg: "bg-[#F19B70]",
+    particleBg: "bg-cream",
+    knobBg: "bg-flame",
     label: "03",
   },
   {
-    url: "/basics",
-    name: "讲点啥",
-    subtitle: "概念扫盲",
-    emoji: "📖",
-    bg: "bg-sky",
+    url: "/picks",
+    name: "瞧瞧外面",
+    subtitle: "值得花 10 分钟的精选",
+    emoji: "✨",
+    doorBg: "bg-mint",
     text: "text-violet",
-    knob: "bg-violet",
+    interiorBg: "bg-gradient-to-b from-ink to-violet-deep",
+    floorBg: "bg-violet",
+    particleBg: "bg-cream",
+    knobBg: "bg-violet-deep",
     label: "04",
   },
 ];
@@ -108,54 +120,78 @@ const doors = [
         </p>
       </div>
 
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-7">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
         {doors.map((d) => (
-          <a href={d.url} class="group block">
-            <div
-              class={`relative aspect-[2/3.2] ${d.bg} ${d.text} rounded-t-[3rem] p-5 flex flex-col items-center overflow-hidden transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-2xl group-hover:shadow-violet/30`}
-              style="box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18), inset 0 -1px 0 0 rgba(0,0,0,0.08);"
-            >
-              {/* room number badge */}
-              <div class="absolute top-4 left-4 text-[10px] font-mono opacity-50 tracking-[0.2em]">
-                NO.{d.label}
-              </div>
+          <a href={d.url} class="group block max-w-[220px] mx-auto w-full">
+            <div class="door-stage relative aspect-[2/3.2]">
 
-              {/* arched transom window */}
-              <svg
-                class="mt-6 w-14 h-10 opacity-45"
-                viewBox="0 0 56 40"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
-                <path d="M3 39 V 18 Q 3 3 28 3 Q 53 3 53 18 V 39 Z" />
-                <line x1="19.5" y1="3.5" x2="19.5" y2="39" stroke-width="1" />
-                <line x1="36.5" y1="3.5" x2="36.5" y2="39" stroke-width="1" />
-              </svg>
-
-              {/* center: emoji + name + subtitle */}
-              <div class="flex-1 flex flex-col items-center justify-center text-center px-2">
-                <div class="text-[3.5rem] md:text-[4rem] mb-5 transition-transform duration-500 group-hover:-rotate-6 group-hover:scale-110">
-                  {d.emoji}
+              {/* === INTERIOR WORLD (behind the door) === */}
+              <div class={`absolute inset-0 rounded-t-[3rem] overflow-hidden ${d.interiorBg}`}>
+                {/* floor band — gives 3D sense of "a room" */}
+                <div class={`absolute left-0 right-0 bottom-0 h-[30%] ${d.floorBg}`}
+                     style="clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 100%);">
                 </div>
-                <h3 class={`font-display font-extrabold text-2xl md:text-3xl tracking-tight leading-none ${d.text}`}>
-                  {d.name}
-                </h3>
-                <p class={`text-sm md:text-base mt-2.5 opacity-70 ${d.text}`}>
-                  {d.subtitle}
-                </p>
+
+                {/* atmosphere particles */}
+                <div class="absolute inset-0 pointer-events-none">
+                  <div class={`door-particle absolute top-[18%] left-[22%] w-1.5 h-1.5 rounded-full ${d.particleBg} opacity-70`}></div>
+                  <div class={`door-particle absolute top-[12%] right-[28%] w-1 h-1 rounded-full ${d.particleBg} opacity-60`}></div>
+                  <div class={`door-particle absolute top-[28%] right-[18%] w-2 h-2 rounded-full ${d.particleBg} opacity-50`}></div>
+                  <div class={`door-particle absolute top-[42%] left-[15%] w-1 h-1 rounded-full ${d.particleBg} opacity-60`}></div>
+                  <div class={`door-particle absolute top-[8%] left-[48%] w-1.5 h-1.5 rounded-full ${d.particleBg} opacity-75`}></div>
+                </div>
+
+                {/* the world's signature element (the "occupant") */}
+                <div class="absolute inset-x-0 top-[32%] flex justify-center">
+                  <span class="door-interior-emoji text-[6rem] md:text-[8rem] leading-none">
+                    {d.emoji}
+                  </span>
+                </div>
+
+                {/* subtle inner shadow at top — implies a ceiling */}
+                <div
+                  class="absolute inset-x-0 top-0 h-12 pointer-events-none"
+                  style="background: linear-gradient(180deg, rgba(0,0,0,0.18), transparent);"
+                ></div>
               </div>
 
-              {/* knob with shine */}
-              <div class={`absolute right-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full ${d.knob} shadow-md transition-all duration-500 group-hover:scale-125`}>
-                <div class="absolute top-0.5 left-0.5 w-1 h-1 rounded-full bg-cream/80"></div>
-              </div>
+              {/* === LIGHT WEDGE spilling outward from the open doorway === */}
+              <div class="door-light-wedge absolute -right-8 top-[15%] w-24 h-[70%] pointer-events-none"></div>
 
-              {/* kick plate */}
-              <div class="absolute left-5 right-5 bottom-5 h-px bg-current opacity-25"></div>
-              <div class="absolute left-7 right-7 bottom-3 h-px bg-current opacity-15"></div>
+              {/* === DOOR PANEL === */}
+              <div class={`door-panel absolute inset-0 ${d.doorBg} ${d.text} rounded-t-[3rem] overflow-hidden`}>
+
+                {/* room number badge */}
+                <div class="absolute top-5 left-5 text-[10px] font-mono opacity-50 tracking-[0.25em]">
+                  NO.{d.label}
+                </div>
+
+                {/* inner panel border (door detailing) */}
+                <div class="absolute inset-4 border border-current opacity-15 rounded-[2rem] pointer-events-none"></div>
+                <div class="absolute inset-7 border-t border-current opacity-10 pointer-events-none"></div>
+
+                {/* center: name + subtitle */}
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-3">
+                  <h3 class={`font-display font-extrabold text-2xl md:text-3xl tracking-tight leading-tight ${d.text}`}>
+                    {d.name}
+                  </h3>
+                  <p class={`text-sm md:text-base mt-3 opacity-70 ${d.text}`}>
+                    {d.subtitle}
+                  </p>
+                </div>
+
+                {/* PROMINENT KNOB — color hints at what's inside === */}
+                <div class={`door-knob-ring absolute right-5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full ${d.knobBg} flex items-center justify-center`}>
+                  <div class="w-2 h-2 rounded-full bg-white/75"></div>
+                </div>
+
+                {/* bottom decoration (kick plate hint) */}
+                <div class="absolute left-6 right-6 bottom-6 h-px bg-current opacity-20"></div>
+                <div class="absolute left-8 right-8 bottom-4 h-px bg-current opacity-10"></div>
+              </div>
             </div>
-            <div class="text-center mt-4 text-xs font-medium text-violet/55 group-hover:text-flame transition-colors duration-300">
+
+            <div class="text-center mt-5 text-xs font-medium text-violet/55 group-hover:text-flame transition-colors duration-300">
               推门进 →
             </div>
           </a>
@@ -166,28 +202,25 @@ const doors = [
 
   <!-- ABOUT BANNER -->
   <section class="bg-cream pb-20 md:pb-28">
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mx-auto px-6">
       <a
         href="/about"
-        class="card-hover group block rounded-3xl bg-peach-deep p-8 md:p-10 relative overflow-hidden"
+        class="card-hover group block rounded-2xl bg-peach-deep px-6 py-5 relative overflow-hidden"
       >
-        <div class="absolute -bottom-12 -right-8 w-56 h-56 rounded-full bg-flame/25 blur-2xl pointer-events-none"></div>
-        <div class="relative flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-          <div class="text-6xl md:text-7xl transition-transform duration-500 group-hover:rotate-12 origin-bottom-left">
+        <div class="absolute -bottom-8 -right-6 w-32 h-32 rounded-full bg-flame/25 blur-2xl pointer-events-none"></div>
+        <div class="relative flex items-center gap-4">
+          <div class="text-3xl transition-transform duration-500 group-hover:rotate-12">
             👋
           </div>
           <div class="flex-1">
-            <p class="text-xs font-medium text-flame mb-2 tracking-widest uppercase">
-              About
-            </p>
-            <h3 class="font-display font-extrabold text-violet text-3xl md:text-4xl mb-2 leading-tight">
+            <h3 class="font-display font-extrabold text-violet text-lg md:text-xl leading-tight">
               关于这里
             </h3>
-            <p class="text-ink/75 max-w-2xl">
-              这个小园地为什么存在、Jojo 是谁、想投个稿/找我聊聊怎么办——都在里面。
+            <p class="text-sm text-ink/70">
+              Jojo 是谁、想投稿怎么找我——都在里面。
             </p>
           </div>
-          <div class="text-violet text-2xl group-hover:translate-x-2 transition-transform duration-300 self-end md:self-center">
+          <div class="text-violet text-xl group-hover:translate-x-1 transition-transform duration-300">
             →
           </div>
         </div>

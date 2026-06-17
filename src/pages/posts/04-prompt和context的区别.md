@@ -2,7 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: Prompt 和 Context 到底有啥区别
 date: 2026-06-06
-category: 讲点啥
+category: 扫个盲
 emoji: 📖
 excerpt: 一个常常被混着用的概念。讲清楚之后，你写指令的方式会变。
 ---
