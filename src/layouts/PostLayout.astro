@@ -2,6 +2,10 @@
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
+const displayDate =
+  frontmatter.date instanceof Date
+    ? frontmatter.date.toISOString().slice(0, 10)
+    : String(frontmatter.date).slice(0, 10);
 ---
 
 <BaseLayout title={`${frontmatter.title} · AI 学习小园地`} description={frontmatter.excerpt}>
@@ -14,7 +18,7 @@ const { frontmatter } = Astro.props;
       <span class="text-xs font-medium px-3 py-1 rounded-full bg-violet/10 text-violet">
         {frontmatter.category}
       </span>
-      <span class="text-sm text-ink/55">{frontmatter.date}</span>
+      <span class="text-sm text-ink/55">{displayDate}</span>
       {frontmatter.author && (
         <span class="text-sm text-ink/55">· {frontmatter.author}</span>
       )}
