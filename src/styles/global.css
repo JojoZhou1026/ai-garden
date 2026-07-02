@@ -102,9 +102,18 @@ a.fancy-link:hover::after {
 .prose-jojo a { color: var(--color-violet); text-decoration: underline; text-decoration-color: var(--color-flame); text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .prose-jojo table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin: 1.5rem 0;
   font-size: 0.95em;
+}
+.prose-jojo th:first-child,
+.prose-jojo td:first-child {
+  width: 40%;
+}
+.prose-jojo th:last-child,
+.prose-jojo td:last-child {
+  width: 60%;
 }
 .prose-jojo th,
 .prose-jojo td {
