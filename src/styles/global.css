@@ -128,13 +128,6 @@ a.fancy-link:hover::after {
   font-weight: 800;
 }
 .prose-jojo tr:last-child td { border-bottom: 0; }
-@media (min-width: 768px) {
-  .prose-jojo table {
-    width: min(58rem, calc(100vw - 4rem));
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-}
 .prose-jojo code {
   background: var(--color-cream);
   padding: 0.15em 0.4em;
