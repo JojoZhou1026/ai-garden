@@ -109,11 +109,11 @@ a.fancy-link:hover::after {
 }
 .prose-jojo th:first-child,
 .prose-jojo td:first-child {
-  width: 40%;
+  width: 48%;
 }
 .prose-jojo th:last-child,
 .prose-jojo td:last-child {
-  width: 60%;
+  width: 52%;
 }
 .prose-jojo th,
 .prose-jojo td {
@@ -128,6 +128,13 @@ a.fancy-link:hover::after {
   font-weight: 800;
 }
 .prose-jojo tr:last-child td { border-bottom: 0; }
+@media (min-width: 768px) {
+  .prose-jojo table {
+    width: min(58rem, calc(100vw - 4rem));
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+}
 .prose-jojo code {
   background: var(--color-cream);
   padding: 0.15em 0.4em;
