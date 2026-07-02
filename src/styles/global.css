@@ -95,9 +95,30 @@ a.fancy-link:hover::after {
 .prose-jojo h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.75rem; }
 .prose-jojo p { margin-bottom: 1.25rem; }
 .prose-jojo ul, .prose-jojo ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+.prose-jojo ul { list-style: disc; }
+.prose-jojo ol { list-style: decimal; }
 .prose-jojo li { margin-bottom: 0.4rem; }
 .prose-jojo strong { color: var(--color-violet); font-weight: 700; }
 .prose-jojo a { color: var(--color-violet); text-decoration: underline; text-decoration-color: var(--color-flame); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.prose-jojo table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95em;
+}
+.prose-jojo th,
+.prose-jojo td {
+  border-bottom: 1px solid rgba(62, 43, 207, 0.16);
+  padding: 0.75rem 0.85rem;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-jojo th {
+  color: var(--color-violet);
+  background: rgba(253, 247, 236, 0.72);
+  font-weight: 800;
+}
+.prose-jojo tr:last-child td { border-bottom: 0; }
 .prose-jojo code {
   background: var(--color-cream);
   padding: 0.15em 0.4em;
