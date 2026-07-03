@@ -1,7 +1,7 @@
 /**
  * 小园地留言接收端
  *
- * 触发：访客在文章页提交留言表单时被 POST 调用
+ * 触发：访客在文章页或关于页提交留言表单时被 POST 调用
  * 路径：/api/submit
  *
  * 需要的 Cloudflare Pages 环境变量：
@@ -64,12 +64,12 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
   }
 
   const safeName = (body.name?.trim() || "匿名小伙伴").slice(0, 100);
-  const safePost = (body.post?.trim() || "未知文章").slice(0, 200);
+  const safePost = (body.post?.trim() || "未知位置").slice(0, 200);
   const safeMessage = body.message.trim().slice(0, 5000);
 
   const subject = `[小园地留言] ${safePost} — ${safeName}`;
   const text = [
-    `📍 文章：${safePost}`,
+    `📍 位置：${safePost}`,
     `🙋 来自：${safeName}`,
     "",
     "留言内容：",
@@ -77,7 +77,7 @@ export const onRequestPost: PagesFunction<Env> = async (ctx) => {
     safeMessage,
     "—".repeat(30),
     "",
-    "（来自 jojomind.com 文章页留言区）",
+    "（来自 jojomind.com 留言区）",
   ].join("\n");
 
   // 调用 Resend

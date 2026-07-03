@@ -46,10 +46,10 @@ const displayDate =
           ✦ 留个言
         </p>
         <h3 class="font-display font-extrabold text-violet text-2xl md:text-3xl mb-2">
-          想问点啥？想说点啥？
+          想问点啥？想补点啥？
         </h3>
         <p class="text-sm text-ink/65 mb-6">
-          问题、补充、不同意见、夸我或者骂我——都可以。每条 Jojo 都会看到，但回不回看缘分。
+          关于这篇内容的问题、补充、不同意见、纠错都可以留在这里。每条 Jojo 都会看到，但不一定都回。
         </p>
 
         {/*
@@ -69,7 +69,7 @@ const displayDate =
             name="message"
             required
             rows="4"
-            placeholder="说点啥……"
+            placeholder="比如：这里我没看懂 / 我也踩过这个坑 / 这个地方可能有误……"
             class="w-full px-4 py-3 rounded-xl bg-peach border border-transparent focus:border-violet focus:outline-none transition-colors text-ink placeholder:text-ink/40 resize-none"
             maxlength="5000"
           ></textarea>
@@ -86,7 +86,7 @@ const displayDate =
 
           <input type="hidden" name="post" value={frontmatter.title} />
 
-          <div class="flex items-center justify-between flex-wrap gap-3">
+          <div class="flex items-center flex-wrap gap-3">
             <button
               type="submit"
               id="comment-submit"
@@ -94,12 +94,6 @@ const displayDate =
             >
               发出 →
             </button>
-            <p class="text-xs text-ink/50">
-              不方便填表？
-              <a href={`mailto:hi@jojomind.com?subject=小园地留言：${frontmatter.title}`} class="text-violet hover:text-flame transition-colors">
-                直接发邮件
-              </a>
-            </p>
           </div>
 
           <p id="comment-status" class="text-sm hidden" role="status" aria-live="polite"></p>
@@ -131,12 +125,12 @@ const displayDate =
                   status.className = "text-sm text-violet font-medium";
                   form.reset();
                 } else {
-                  const msg = (data && data.error) || "没发出去，可以用上面的邮件链接试试。";
+                  const msg = (data && data.error) || "没发出去，可以稍后再试。";
                   status.textContent = "⚠️ " + msg;
                   status.className = "text-sm text-flame font-medium";
                 }
               } catch (err) {
-                status.textContent = "⚠️ 网络出了点问题，可以用上面的邮件链接试试。";
+                status.textContent = "⚠️ 网络出了点问题，可以稍后再试。";
                 status.className = "text-sm text-flame font-medium";
               } finally {
                 btn.disabled = false;
