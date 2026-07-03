@@ -4,7 +4,7 @@ title: AI Chatbot vs AI Agent：一个像聊天顾问，一个像数字同事
 date: 2026-07-03
 category: 扫个盲
 emoji: 📖
-excerpt: 一个像聊天顾问，一个像数字同事。先把这两个经常被混着用的词分清楚。
+excerpt: 相信大家都用过豆包，那到底什么是AI agent？
 ---
 
 ![AI Chatbot vs AI Agent](/images/ai-chatbot-vs-agent.png)
