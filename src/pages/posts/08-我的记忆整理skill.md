@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: 我的记忆整理skill，直接抄
+title: 我的记忆整理skill
 date: 2026-07-02
 category: 抄两招
 emoji: 🗂️
