@@ -60,7 +60,7 @@ const doors = [
 
 <BaseLayout>
   <!-- HERO -->
-  <section class="relative">
+  <section class="relative min-h-[calc(100vh-4rem)] flex items-center">
     <ShapeBg />
     <div class="relative max-w-6xl mx-auto px-6 pt-16 pb-16 md:pt-22 md:pb-18">
       <p class="text-sm font-medium text-flame mb-6 tracking-wide">
@@ -88,9 +88,8 @@ const doors = [
         的小角落。
       </h1>
       <p class="max-w-3xl text-lg md:text-xl text-ink/75 leading-relaxed mb-10">
-        越来越多人开始问我AI怎么用。
-        我把自己试过、踩过、用上的真实经验放在这里。
-        目前有四个房间，欢迎来串门：挑想看的看，有用就拿走。
+        <span class="block">一个慢慢生长的AI学习园地。</span>
+        <span class="block">如果你也在摸索AI怎么用，欢迎来串门：挑想看的看，有用就拿走。</span>
       </p>
 
       <div class="flex flex-wrap gap-3">
@@ -228,3 +227,4 @@ const doors = [
     </div>
   </section>
 </BaseLayout>
+
