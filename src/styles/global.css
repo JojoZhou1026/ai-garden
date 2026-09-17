@@ -168,6 +168,132 @@ a.fancy-link:hover::after {
   font-style: italic;
 }
 
+/* This article's central tension: personal experimentation and enterprise rollout run at different speeds. */
+.article-speed-map {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 2rem 0 3rem;
+  padding: 1.6rem;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(255, 107, 71, 0.48), transparent 30%),
+    var(--color-violet-deep);
+  color: var(--color-cream);
+  box-shadow: 0 22px 55px -35px rgba(41, 24, 163, 0.9);
+}
+.prose-jojo .article-speed-map p { margin: 0; }
+.speed-map-eyebrow {
+  margin-bottom: 1.1rem !important;
+  color: var(--color-flame-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+.speed-lane {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 0;
+}
+.speed-lane + .speed-lane {
+  border-top: 1px solid rgba(253, 247, 236, 0.16);
+}
+.speed-lane-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.speed-track {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  min-width: 0;
+}
+.speed-track span {
+  flex: 0 1 auto;
+  padding: 0.35rem 0.58rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.speed-track i {
+  flex: 0 0 auto;
+  color: rgba(253, 247, 236, 0.42);
+  font-style: normal;
+  font-size: 0.75rem;
+}
+.speed-lane-fast .speed-track span {
+  background: var(--color-flame);
+  color: var(--color-cream);
+}
+.speed-lane-slow .speed-track span {
+  border: 1px solid rgba(253, 247, 236, 0.14);
+  background: rgba(253, 247, 236, 0.12);
+  color: rgba(253, 247, 236, 0.86);
+}
+.speed-map-note {
+  margin-top: 1.15rem !important;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(253, 247, 236, 0.16);
+  color: rgba(253, 247, 236, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.prose-jojo .bridge-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 1.5rem 0 1.75rem;
+  padding: 0;
+  list-style: none;
+}
+.prose-jojo .bridge-list li {
+  position: relative;
+  margin: 0;
+  padding: 1rem 1rem 1rem 2.1rem;
+  border: 1px solid rgba(62, 43, 207, 0.12);
+  border-radius: 16px;
+  background: rgba(253, 247, 236, 0.62);
+  line-height: 1.58;
+}
+.prose-jojo .bridge-list li::before {
+  content: "";
+  position: absolute;
+  top: 1.48rem;
+  left: 1rem;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 50%;
+  background: var(--color-flame);
+  box-shadow: 0 0 0 4px rgba(255, 107, 71, 0.12);
+}
+
+@media (max-width: 700px) {
+  .article-speed-map {
+    margin-inline: -0.35rem;
+    padding: 1.3rem;
+    border-radius: 22px;
+  }
+  .speed-lane {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+  .speed-track {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .speed-track span {
+    font-size: 0.68rem;
+  }
+  .prose-jojo .bridge-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* === DOOR === */
 /* Each door pivots open on hover, revealing a glimpse of its world. */
 
