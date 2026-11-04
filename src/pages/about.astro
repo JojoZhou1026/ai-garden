@@ -16,18 +16,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <div class="prose-jojo">
         <p>
-          这里是我的 AI 学习小园地。
+          这里是我的 AI 学习小园地，纯个人兴趣分享，不做商业经营或推广。
         </p>
-
-        <div class="my-8 rounded-2xl bg-cream p-6">
-          <h2>纯个人兴趣分享 · 非商业</h2>
-          <p>
-            这个网站由我个人出于兴趣搭建和维护，仅用于分享个人学习记录、工具体验和公开资料，不用于商业经营或推广。
-          </p>
-          <p>
-            这里不涉及我所在公司的业务、客户或内部项目信息。所有观点仅代表我个人，不代表任何公司或组织的立场。
-          </p>
-        </div>
 
         <p>
           我原本不是技术出身。过去这段时间，我开始在个人学习和生活中尝试用 AI 做一些具体的事：
@@ -37,6 +27,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <p>
           它更像一个开放的工作台：我把自己试过、踩过、用上的东西摊出来。你路过，觉得有用，就拿走。
         </p>
+
+        <aside class="personal-note" aria-label="内容边界">
+          这里只分享个人实践与公开资料，不涉及我所在公司的业务、客户或内部项目信息。观点仅代表我个人，不代表任何公司或组织。
+        </aside>
 
         <h2>这里会有什么</h2>
         <ul>
@@ -187,3 +181,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .personal-note {
+    margin: 1.75rem 0 2.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-flame);
+    color: #5c536e;
+    font-size: 0.875rem;
+    line-height: 1.85;
+  }
+</style>
